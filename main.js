@@ -28,9 +28,14 @@ client.on('message', message => {
     const args = message.content.slice(prefix.length).split(/_+/);
     const command = args.shift().toLowerCase();
 
-    if(command === 'ping') {
+    if (command === 'command') {
+        // To display an embed
+        client.commands.get('command').execute(message, args, Discord);
+    }
+    else if(command === 'ping') {
         client.commands.get('ping').execute(message, args);
-    } else if(command == 'youtube') {
+    }
+    else if(command == 'youtube') {
         client.commands.get('youtube').execute(message, args);
     }
 })
