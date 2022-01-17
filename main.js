@@ -31,7 +31,7 @@ client.on('message', message => {
     if(command === 'ping') {
         client.commands.get('ping').execute(message, args);
     } else if(command == 'youtube') {
-        // call the command js file
+        client.commands.get('youtube').execute(message, args);
     }
 })
 
