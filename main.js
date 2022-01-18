@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 
-const client = new Discord.Client({intents: ['GUILD_MESSAGES', 'GUILDS']});
-// prefix of the user's commands to call the bot
+const client = new Discord.Client({ intents: ['GUILD_MESSAGES', 'GUILDS'] });
+// Prefix of the user's commands to call the bot
 const prefix = '-';
 
 const fs = require('fs');
@@ -12,7 +12,8 @@ client.commands = new Discord.Collection();
 // Checkinng whether command file is .js or not
 const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
 
-for(const file of commandFiles) {
+// Surfing through all command files
+for (const file of commandFiles) {
     const command = require(`./commands/${file}`);
     client.commands.set(command.name, command)
 }
@@ -23,23 +24,18 @@ client.once('ready', () => {
 
 // To Add Logic to the User's Commands
 client.on('message', message => {
-    if(!message.content.startsWith(prefix) || message.author.bot) return;
+    if (!message.content.startsWith(prefix) || message.author.bot) return;
 
     const args = message.content.slice(prefix.length).split(/ +/);
     const command = args.shift().toLowerCase();
 
-    if (command === 'command') {
-        client.commands.get('command').execute(message, args, Discord);
-    } else if(command === 'ping') {
-        client.commands.get('ping').execute(message, args);
-    } else if(command === 'youtube') {
-        client.commands.get('youtube').execute(message, args);
-    } else if(command === 'clear') {
-        client.commands.get('clear').execute(message, args);
-    } else if(command === 'kick') {
-        client.commands.get('kick').execute(message, args);
-    } else if(command === 'ban') {
-        client.commands.get('ban').execute(message, args);
+    // To execute the commands
+    if (command === 'ping') {
+        client.commands.get('ping').execute(message, args, Discord);
+    } else if (command === 'mute') {
+        client.commands.get('mute').execute(message, args);
+    } else if (command === 'unmute') {
+        client.commands.get('unmute').execute(message, args);
     }
 })
 
