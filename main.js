@@ -29,17 +29,17 @@ client.on('message', message => {
     const command = args.shift().toLowerCase();
 
     if (command === 'command') {
-        // To display an embed
         client.commands.get('command').execute(message, args, Discord);
-    }
-    else if(command === 'ping') {
+    } else if(command === 'ping') {
         client.commands.get('ping').execute(message, args);
-    }
-    else if(command === 'youtube') {
+    } else if(command === 'youtube') {
         client.commands.get('youtube').execute(message, args);
-    }
-    else if(command === 'clear') {
+    } else if(command === 'clear') {
         client.commands.get('clear').execute(message, args);
+    } else if(command === 'kick') {
+        client.commands.get('kick').execute(message, args);
+    } else if(command === 'ban') {
+        client.commands.get('ban').execute(message, args);
     }
 })
 
