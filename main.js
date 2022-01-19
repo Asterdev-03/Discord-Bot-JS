@@ -1,6 +1,10 @@
 const Discord = require('discord.js');
 
-const client = new Discord.Client({ intents: ['GUILD_MESSAGES', 'GUILDS', 'GUILD_MEMBERS'] });
+const client = new Discord.Client(
+    { intents: ['GUILD_MESSAGES', 'GUILDS', 'GUILD_MEMBERS'] },
+    { partials: ['MESSAGE', 'CHANNEL', 'REACTION', 'USER'] }
+);
+
 // Prefix of the user's commands to call the bot
 const prefix = '-';
 
@@ -43,8 +47,10 @@ client.on('message', message => {
         client.commands.get('ping').execute(message, args, Discord);
     } else if (command === 'kick') {
         client.commands.get('kick').execute(message, args);
-    } 
+    } else if (command === 'reactionrole') {
+        client.commands.get('reactionrole').execute(message, args, Discord, client);
+    }
 })
 
 // Token Key of the Bot
-client.login('ZTMyMjc0MTU3MDc1NDM5NjY2.YeQl9w.X2YYWbOvocSjNuXQpswNeEcx7PZ');
+client.login('OTMyMjc0MTU3MDc1NDM5NjY2.YeQl9w.X2YYWbOvocSjNuXQpswNeEcx7PU');
