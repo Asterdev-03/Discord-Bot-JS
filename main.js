@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 
-const client = new Discord.Client({ intents: ['GUILD_MESSAGES', 'GUILDS'] });
+const client = new Discord.Client({ intents: ['GUILD_MESSAGES', 'GUILDS', 'GUILD_MEMBERS'] });
 // Prefix of the user's commands to call the bot
 const prefix = '-';
 
@@ -22,6 +22,15 @@ client.once('ready', () => {
     console.log('Albega is online!');
 });
 
+// To welcome new members and giving them 'member' role
+client.on('guildMemberAdd', guildMember => {
+    let welcomeRole = guildMember.guild.roles.cache.find(role => role.name === 'member');
+
+    guildMember.roles.add(welcomeRole);
+
+    guildMember.guild.channels.cache.get('869442841431142450').send(`Welcome <@${guildMember.user.id}> to our server! Make sure to check rules channel...`);
+});
+
 // To Add Logic to the User's Commands
 client.on('message', message => {
     if (!message.content.startsWith(prefix) || message.author.bot) return;
@@ -32,11 +41,9 @@ client.on('message', message => {
     // To execute the commands
     if (command === 'ping') {
         client.commands.get('ping').execute(message, args, Discord);
-    } else if (command === 'mute') {
-        client.commands.get('mute').execute(message, args);
-    } else if (command === 'unmute') {
-        client.commands.get('unmute').execute(message, args);
-    }
+    } else if (command === 'kick') {
+        client.commands.get('kick').execute(message, args);
+    } 
 })
 
 // Token Key of the Bot
